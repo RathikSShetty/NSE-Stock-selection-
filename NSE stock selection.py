@@ -43,10 +43,16 @@ evaluated_stocks = evaluate_stocks(stock_data)
 under_valued_stocks = evaluated_stocks[evaluated_stocks['Valuation'] == 'Under-valued']
 over_valued_stocks = evaluated_stocks[evaluated_stocks['Valuation'] == 'Over-valued']
 
-print("Under-valued Stocks:")
-print(under_valued_stocks)
 
-print("\nOver-valued Stocks:")
-print(over_valued_stocks)
+# Display results
+def display_stocks(stock_df, title):
+    print(f"{title}:\n")
+    if stock_df.empty:
+        print("None")
+    else:
+        print(stock_df[['Symbol', 'Name', 'Sector', 'P/E Ratio', 'Sector Avg P/E', 'Valuation']].to_string(index=False))
+    print("\n")
 
 
+display_stocks(under_valued_stocks, "Under-valued Stocks")
+display_stocks(over_valued_stocks, "Over-valued Stocks")
